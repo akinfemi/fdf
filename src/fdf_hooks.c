@@ -6,7 +6,7 @@
 /*   By: aakin-al <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/20 23:49:50 by aakin-al          #+#    #+#             */
-/*   Updated: 2017/05/21 00:12:16 by aakin-al         ###   ########.fr       */
+/*   Updated: 2017/05/21 00:19:43 by aakin-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 int			keyboard_hook(int keycode, t_env *e)
 {
-	if (e->win)
-	{
-	//	return (0);
-	}
+	if (!(e->win))
+		return (0);
 	if (keycode == 53)
 		exit(0);
 	printf("Key: %d\n", keycode);
