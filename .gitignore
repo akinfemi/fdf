@@ -34,3 +34,6 @@
 
 #swap files
 *.swp
+
+#example file
+example/

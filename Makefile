@@ -20,7 +20,7 @@ LDFLAGS		:= -L libft/ -lft -L minilibx/ -lmlx -framework OpenGL -framework AppKi
 LIBFT		:= libft/libft.a
 MINILIBX	:= minilibx/libmlx.a
 
-FILES		:=fdf_main
+FILES		:=fdf_main fdf_hooks
 
 SRC		:= $(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJ		:= $(SRC:.c=.o)
