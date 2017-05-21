@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jkalia <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: aakin-al <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/03/23 14:12:11 by jkalia            #+#    #+#              #
-#*   Updated: 2017/05/04 16:22:58 by jkalia           ###   ########.fr       *#
+#    Created: 2017/05/21 01:07:15 by aakin-al          #+#    #+#              #
+#    Updated: 2017/05/21 01:07:31 by aakin-al         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= fdf
-CC		:= gcc
+CC			:= gcc
 CFLAGS		+= -Wall -Wextra -Werror
 
 CFLAGS		+= -I includes/ -I libft/ -I minilibx
@@ -20,7 +20,7 @@ LDFLAGS		:= -L libft/ -lft -L minilibx/ -lmlx -framework OpenGL -framework AppKi
 LIBFT		:= libft/libft.a
 MINILIBX	:= minilibx/libmlx.a
 
-FILES		:=fdf_main fdf_hooks
+FILES		:=fdf_main fdf_funcs
 
 SRC		:= $(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJ		:= $(SRC:.c=.o)
