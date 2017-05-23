@@ -6,7 +6,7 @@
 /*   By: aakin-al <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/20 23:49:50 by aakin-al          #+#    #+#             */
-/*   Updated: 2017/05/21 02:09:37 by aakin-al         ###   ########.fr       */
+/*   Updated: 2017/05/23 15:10:45 by aakin-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,31 @@ void		file_init(t_file **file, char *path)
 	f->width = ft_strlen(f->coords[0]); //note spaces and new line
 	close (fd);
 }
-	/*
-int			mouse_hook(int button, int x, int y, t_env *e)
+
+void		draw_line(t_env *e, int x0, int y0, int x1, int y1)
 {
-	if (e->win)
+	int		dx;
+	int		dy;
+	int		e;
+	int		s;
+
+	dx = abs(x1 - x0);
+	dy = abs(y1 - y0);
+	e = (dx > dy ? dx : -dy) / 2;
+	while (x0 <= x2 - 1)
 	{
-//		return (0);
+		mlx_pixel_put(e->mlx, e->win, x0, y0, 0xFFFFFF);
+		if (e >= 0)
+		{
+			y0++;;
+			e -= dx;
+		}
+		x0++;
+		e += dy;
 	}
-	printf("Mouse: %d Coord: (%d,%d)\n", button, x, y);
-	return (0);
 }
-*/
+
+int			expose_hook(int keycode, t_env *e)
+{
+	//
+}
