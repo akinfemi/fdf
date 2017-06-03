@@ -29,6 +29,7 @@ t_points        **make_map(int **coords, int width, int height)
 
     i = 0;
     j = 0;
+    (void)coords;
     map = (t_points **)malloc(sizeof(t_points) * (width * height));
     printf("Len: %d\n", width * height);
     while (i < height)
@@ -37,12 +38,11 @@ t_points        **make_map(int **coords, int width, int height)
         {
             map[conv(i, j, width)] = new_point(i, j, coords[i][j]);
 //            printf("Conv: %d\n", conv(i,j,width));
-            printf("Map:%d,%d,%d\n", map[conv(i,j,width)]->x, map[conv(i,j,width)]->y, map[conv(i,j,width)]->z);
+//            printf("Map:%d,%d,%d\n", map[conv(i,j,width)]->x, map[conv(i,j,width)]->y, map[conv(i,j,width)]->z);
             j++;
         }
         i++;
         j = 0;
     }
-    printf("Done\n");
     return (map);
 }

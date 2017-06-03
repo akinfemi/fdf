@@ -33,7 +33,7 @@ int			keyboard_hook(int keycode, t_env *e)
 	return (0);
 }
 
-int			*ft_toint(char *str)
+int			*ft_toint(char *str, int width)
 {
 	int		len;
 	int		i;
@@ -43,7 +43,7 @@ int			*ft_toint(char *str)
 	len = ft_strlen(str);
 	i = 0;
 	j = 0;
-	res = (int *)ft_memalloc(sizeof(int) * (len / 2 + 1) + 1);
+	res = (int *)ft_memalloc(sizeof(int) * (width) + 1);
 	while (i < len)
 	{
 		res[j] = ft_atoi(str + i);
@@ -55,18 +55,21 @@ int			*ft_toint(char *str)
 
 static int         num_count(char  *str)
 {
-    int     res;
+    int     count;
 
-    res = 0;
-    while (*str)
+    count = 0;
+    while (*str != '\0')
     {
         if (*str >= '0' && *str <= '9')
-            res++;
-        while (*str >= '0' && *str <= '9')
+        {
+            count++;
+            while (*str >= '0' && *str <= '9')
+                str++;
+        }
+        else
             str++;
-        str++;
     }
-    return (res);
+    return (count);
 }
 
 void		file_init(t_file **file, char *path)
@@ -93,7 +96,7 @@ void		file_init(t_file **file, char *path)
 	while (i < f->height)
 	{
 		get_next_line(fd, &buf);
-		f->coords[i] = ft_toint(buf);
+		f->coords[i] = ft_toint(buf, f->width);
 		free(buf);
 		i++;
 	}
