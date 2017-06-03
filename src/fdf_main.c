@@ -6,7 +6,7 @@
 /*   By: aakin-al <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 14:31:52 by aakin-al          #+#    #+#             */
-/*   Updated: 2017/05/23 15:09:23 by aakin-al         ###   ########.fr       */
+/*   Updated: 2017/05/25 13:36:36 by aakin-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,12 @@ int main(int ac, char **ag)
 		return (0);
 	e->mlx = mlx_init();
 	file_init(&f, ag[1]);
+	e->file = f;
 	e->win = mlx_new_window(e->mlx, f->width * 100, f->height*100, "Title");
-	mlx_expose_hook(e->win, expose_hook, &e);	
+	draw(e, 100, 100);
+	/*where x,y starting are coords*/
+/*	plot_line(e, 100, 100, 300, 300);
+	plot_line(e, 200, 10, 10, 200);*/
 	mlx_key_hook(e->win, keyboard_hook, &e);
 	mlx_loop(e->mlx);
 

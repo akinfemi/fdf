@@ -38,3 +38,5 @@ fdf
 
 #example file
 example/
+cmake-build-debug/
+.idea/

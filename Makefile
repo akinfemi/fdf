@@ -6,7 +6,7 @@
 #    By: aakin-al <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/21 01:07:15 by aakin-al          #+#    #+#              #
-#    Updated: 2017/05/23 13:48:02 by aakin-al         ###   ########.fr        #
+#    Updated: 2017/05/25 13:48:38 by aakin-al         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LDFLAGS		:= -L libft/ -lft -L minilibx/ -lmlx -framework OpenGL -framework AppKi
 LIBFT		:= libft/libft.a
 MINILIBX	:= minilibx/libmlx.a
 
-FILES		:=fdf_main fdf_funcs
+FILES		:=fdf_main fdf_funcs fdf_draw print_map
 
 SRC		:= $(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJ		:= $(SRC:.c=.o)
