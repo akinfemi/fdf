@@ -31,6 +31,7 @@ typedef struct		s_file
 	int				**coords;
 	int				height;
 	int				width;
+    struct s_points **points;
 }					t_file;
 typedef struct		s_env
 {
@@ -42,6 +43,7 @@ int					usage(int ac, char **ag);
 int					keyboard_hook(int keycode, t_env *e);
 void				file_init(t_file **file, char *path);
 void				draw_line(t_env *e, int x0, int y0, int x1, int y1);
-void				draw(t_env *e, int s_x, int s_y);
+void				draw(t_env *e);
 t_points            **make_map(int **coords, int width, int height);
+int        conv(int i, int j, int width);
 #endif

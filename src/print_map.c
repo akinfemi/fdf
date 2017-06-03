@@ -29,7 +29,7 @@ t_points        **make_map(int **coords, int width, int height)
 
     i = 0;
     j = 0;
-    map = (t_points **)malloc(sizeof(t_points *) * (width * height));
+    map = (t_points **)malloc(sizeof(t_points) * (width * height));
     printf("Len: %d\n", width * height);
     while (i < height)
     {
