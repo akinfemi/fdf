@@ -53,6 +53,22 @@ int			*ft_toint(char *str)
 	return (res);
 }
 
+int         num_count(char  *str)
+{
+    int     res;
+
+    res = 0;
+    while (*str)
+    {
+        if (*str >= '0' && *str <= '9')
+            res++;
+        while (*str >= '0' && *str <= '9')
+            str++;
+        str++;
+    }
+    return (res);
+}
+
 void		file_init(t_file **file, char *path)
 {
 	int		fd;
@@ -64,6 +80,8 @@ void		file_init(t_file **file, char *path)
 	fd = open(path, O_RDONLY);
 	f->height = 0;
 	i = 0;
+    if(get_next_line(open(path, O_RDONLY), &buf))
+        f->width = num_count(buf);
 	while (get_next_line(fd, &buf))
 	{
 		free(buf);
@@ -79,9 +97,9 @@ void		file_init(t_file **file, char *path)
 		free(buf);
 		i++;
 	}
-	f->width = f->height; //check if this is a valid assumption
 	close (fd);
-	test_print_map(f->coords, f->height);
+    printf("W: %d, H: %d\n", f->width, f->height);
+	make_map(f->coords, f->width, f->height);
 }
 
 void		draw_line (t_env *e, int x0, int y0, int x1, int y1)
