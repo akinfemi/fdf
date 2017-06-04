@@ -6,7 +6,7 @@
 /*   By: aakin-al <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 14:32:46 by aakin-al          #+#    #+#             */
-/*   Updated: 2017/06/03 21:50:53 by aakin-al         ###   ########.fr       */
+/*   Updated: 2017/06/04 00:50:30 by aakin-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,14 @@ typedef struct		s_env
 	struct s_file	*file;
 	int				win_width;
 	int				win_height;
-	int 			scale;
+	int				scale;
 }					t_env;
 int					usage(int ac, char **ag);
 int					keyboard_hook(int keycode, t_env *e);
 int					file_init(t_file **file, char *path);
-//void				draw_line(t_env *e, t_points *a, t_points *b);
 void				draw(t_env *e);
 t_points			**make_map(int **coords, int width, int height);
 int					conv(int i, int j, int width);
+void				draw_line(t_env *env, t_points src0, t_points src1);
 
-
-void				draw_line(t_env *e, int x0, int y0, int x1, int y1);
 #endif
