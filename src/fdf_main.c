@@ -19,12 +19,13 @@ int main(int ac, char **ag)
 
 	e = (t_env *)malloc(sizeof(t_env));
 	f = (t_file *)malloc(sizeof(t_file));
-	if (usage(ac, ag))
+	if (usage(ac, ag) || open(ag[1], O_RDONLY) < 0)
 		return (0);
 	e->mlx = mlx_init();
-	file_init(&f, ag[1]);
+    if(!(file_init(&f, ag[1])))
+        return (0);
 	e->file = f;
-	e->win = mlx_new_window(e->mlx, f->width * 100, f->height*100, "F.D.F");
+	e->win = mlx_new_window(e->mlx, f->width * 80, f->height*80, "F.D.F");
 	draw(e);
 	/*where x,y starting are coords*/
 /*	plot_line(e, 100, 100, 300, 300);

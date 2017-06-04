@@ -72,7 +72,7 @@ static int         num_count(char  *str)
     return (count);
 }
 
-void		file_init(t_file **file, char *path)
+int		file_init(t_file **file, char *path)
 {
 	int		fd;
 	char 	*buf;
@@ -81,28 +81,24 @@ void		file_init(t_file **file, char *path)
 
 	f = *file;
 	fd = open(path, O_RDONLY);
-	f->height = 0;
-	i = 0;
-    if(get_next_line(open(path, O_RDONLY), &buf))
+	f->height = 1;
+	i = -1;
+    if(fd > 0 && get_next_line(fd, &buf) != 0)
         f->width = num_count(buf);
+    else
+        return (0);
 	while (get_next_line(fd, &buf))
-	{
-		free(buf);
 		f->height++;
-	}
 	f->coords = (int **)ft_memalloc(sizeof(int *) * (f->height + 1));
-	close(fd);
 	fd = open(path, O_RDONLY);
-	while (i < f->height)
+	while (++i < f->height)
 	{
 		get_next_line(fd, &buf);
 		f->coords[i] = ft_toint(buf, f->width);
-		free(buf);
-		i++;
 	}
 	close (fd);
-    printf("W: %d, H: %d\n", f->width, f->height);
 	f->points = make_map(f->coords, f->width, f->height);
+    return (1);
 }
 
 //void		draw_line (t_env *e, int x0, int y0, int x1, int y1)
@@ -137,30 +133,45 @@ void		file_init(t_file **file, char *path)
 //	}
 //}
 
-void		draw_line (t_env *e, int x1, int y1, int x2, int y2)
-{
-    int delta_x;
-    int delta_y;
-    float m;
-    float b;
+void draw_line(t_env *e, int x0, int y0, int x1, int y1) {
 
-    delta_x = x2 - x1;
-    delta_y = y2 - y1;
-    printf("x: %d, y: %d, x2: %d, y2: %d\n", x1,y1,x2,y2);
-    if (delta_x)
-    {
-        m = (float)delta_y / delta_x;
-        b = (float)y1 - m * x1;
-        while (x1 != x2)
-        {
-            mlx_pixel_put(e->mlx, e->win, x1, y1, 0x008000);
-            x1 = x1 > x2 ? --x1 : ++x1;
-        }
+    int dx = abs(x1-x0), sx = x0<x1 ? 1 : -1;
+    int dy = abs(y1-y0), sy = y0<y1 ? 1 : -1;
+    int err = (dx>dy ? dx : -dy)/2, e2;
+
+    while (1){
+        mlx_pixel_put(e->mlx, e->win, x0, y0, 0x008000);
+        if (x0==x1 && y0==y1) break;
+        e2 = err;
+        if (e2 >-dx) { err -= dy; x0 += sx; }
+        if (e2 < dy) { err += dx; y0 += sy; }
     }
-    else
-        while (y1 != y2)
-        {
-            mlx_pixel_put(e->mlx, e->win, x1, y1, 0x008000);
-            y1 = y1 > y2 ? --y1 : ++y1;
-        }
 }
+
+//void		draw_line (t_env *e, int x1, int y1, int x2, int y2)
+//{
+//    int delta_x;
+//    int delta_y;
+//    float m;
+//    float b;
+//
+//    delta_x = x2 - x1;
+//    delta_y = y2 - y1;
+//    printf("x: %d, y: %d, x2: %d, y2: %d\n", x1,y1,x2,y2);
+//    if (delta_x)
+//    {
+//        m = (float)delta_y / delta_x;
+//        b = (float)y1 - m * x1;
+//        while (x1 != x2)
+//        {
+//            mlx_pixel_put(e->mlx, e->win, x1, y1, 0x008000);
+//            x1 = x1 > x2 ? --x1 : ++x1;
+//        }
+//    }
+//    else
+//        while (y1 != y2)
+//        {
+//            mlx_pixel_put(e->mlx, e->win, x1, y1, 0x008000);
+//            y1 = y1 > y2 ? --y1 : ++y1;
+//        }
+//}

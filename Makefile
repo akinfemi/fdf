@@ -12,7 +12,7 @@
 
 NAME		:= fdf
 CC			:= gcc
-CFLAGS		+= -Wall -Wextra -Werror
+CFLAGS		+= -Wall -Wextra -Werror -g
 
 CFLAGS		+= -I includes/ -I libft/ -I minilibx
 LDFLAGS		:= -L libft/ -lft -L minilibx/ -lmlx -framework OpenGL -framework AppKit
