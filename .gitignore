@@ -43,3 +43,4 @@ cmake-build-debug/
 .DS_Store
 ._*
 .nfs*
+*.fdf
