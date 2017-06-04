@@ -12,7 +12,7 @@ t_points       *new_point(int x, int y, int z)
         return (0);
     point->x = x * 50;
     point->y = y * 50;
-    point->z = z * 50;
+    point->z = z * 7;
     return (point);
 }
 
@@ -30,13 +30,10 @@ t_points        **iso_map(t_points **map, int size)
     i = 0;
     while (i < size)
     {
-        ty = map[i]->x + 2 * map[i]->y + map[i]->z;
-        tx = sqrt(3) * map[i]->x - sqrt(3) * map[i]->z;
-        printf("nx: %d, ny:%d\n", tx, ty);
+        tx = sqrt(2) * map[i]->x + sqrt(2) * map[i]->y + sqrt(2) * map[i]->z;
+        ty = sqrt(3) * map[i]->x - sqrt(3) * map[i]->z;
         map[i]->y = ty / sqrt(6);
         map[i]->x = tx / sqrt(6);
-//        map[i]->y = map[i]->x + 2 * map[i]->y + map[i]->z;
-//        map[i]->x = sqrt(3) * map[i]->x - sqrt(3) * map[i]->z;
         i++;
     }
     return (map);
@@ -47,12 +44,10 @@ t_points        **make_map(int **coords, int width, int height)
     t_points    **map;
     int         i;
     int         j;
-//    t_points    **temp;
 
     i = 0;
     j = 0;
-    map = (t_points **)malloc(sizeof(t_points) * (width * height));
-    printf("Len: %d\n", width * height);
+    map = (t_points **)malloc(sizeof(t_points *) * (width * height));
     while (i < height)
     {
         while (j < width)
@@ -63,8 +58,6 @@ t_points        **make_map(int **coords, int width, int height)
         i++;
         j = 0;
     }
-//    temp = map;
     map = iso_map(map, width * height);
-//    free (temp);
     return (map);
 }

@@ -38,10 +38,12 @@ typedef struct		s_env
 	void			*mlx;
 	void			*win;
 	struct s_file	*file;
+    int             win_width;
+    int             win_height;
 }					t_env;
 int					usage(int ac, char **ag);
 int					keyboard_hook(int keycode, t_env *e);
-int				file_init(t_file **file, char *path);
+int				    file_init(t_file **file, char *path);
 void				draw_line(t_env *e, int x0, int y0, int x1, int y1);
 void				draw(t_env *e);
 t_points            **make_map(int **coords, int width, int height);

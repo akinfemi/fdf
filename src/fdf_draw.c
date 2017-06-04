@@ -11,42 +11,31 @@
 /* ************************************************************************** */
 
 #include <fdf.h>
-//
-//int		to_x(int nb, int width)
-//{
-//	return ((nb >= width) ? nb / width : 0);
-//}
-//
-//int		to_y(int nb, int width)
-//{
-//	return ((nb < width) ? nb : nb % width);
-//}
 
 void	draw(t_env *e)
 {
-	t_file	*f;
-	int		i;
-	int		len;
+	t_file      *f;
+	int         i;
+	int         len;
     t_points    **map;
-	int		offset;
+	int		    off[2];
 
 	f = e->file;
-	i = 0;
+	i = -1;
 	len = f->width * f->height;
     map = f->points;
-	offset = (f->width * 80 / 2) - (f->width * 50 / 2);
-    while (i < len - 1)
+	off[0] = (e->win_width / 2) - (f->width * 50 / 2);
+    off[1] = (e->win_height / 2) - (f->height * 50 / 2);
+    while (++i < len - 1)
 	{
         if ((i + 1) % f->width != 0)
-            draw_line(e, map[i]->x + offset, map[i]->y + offset,
-                  map[i+1]->x + offset, map[i+1]->y + offset);
-		i++;
+            draw_line(e, map[i]->x + off[0], map[i]->y + off[1],
+                  map[i+1]->x + off[0], map[i+1]->y + off[1]);
 	}
-    i = 0;
-    while (i < len - f->width)
+    i = -1;
+    while (++i < len - f->width)
     {
-        draw_line(e, map[i]->x + offset, map[i]->y + offset,
-                  map[i+f->width]->x + offset, map[i+f->width]->y + offset);
-        i++;
+        draw_line(e, map[i]->x + off[0], map[i]->y + off[1],
+                  map[i+f->width]->x + off[0], map[i+f->width]->y + off[1]);
     }
 }

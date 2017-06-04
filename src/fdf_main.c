@@ -19,20 +19,20 @@ int main(int ac, char **ag)
 
 	e = (t_env *)malloc(sizeof(t_env));
 	f = (t_file *)malloc(sizeof(t_file));
+    printf("alloc\n");
 	if (usage(ac, ag) || open(ag[1], O_RDONLY) < 0)
 		return (0);
 	e->mlx = mlx_init();
+    printf("mlx_init\n");
     if(!(file_init(&f, ag[1])))
         return (0);
+    printf("file_init\n");
 	e->file = f;
-	e->win = mlx_new_window(e->mlx, f->width * 80, f->height*80, "F.D.F");
+    e->win_height = (f->height < 100) ? f->height * 100 : f->height * 50;
+    e->win_width = (f->width < 100) ? f->width * 100 : f->width * 50;
+	e->win = mlx_new_window(e->mlx, e->win_width, e->win_height, "F.D.F");
 	draw(e);
-	/*where x,y starting are coords*/
-/*	plot_line(e, 100, 100, 300, 300);
-	plot_line(e, 200, 10, 10, 200);*/
 	mlx_key_hook(e->win, keyboard_hook, &e);
 	mlx_loop(e->mlx);
-
-//	free(e);
 	return (0);
 }
